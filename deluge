@@ -1,0 +1,53 @@
+// Trigger: On User Input of Text (New Prompt)
+
+if(input.Text_Input != "" && input.Refine_Input = false && input.Chat_Output == "")
+{
+	// Setup Headers
+	headers = Map();
+	headers.put("Content-Type","application/json");
+	headers.put("Authorization","Bearer YOUR-API-KEY");
+	headers.put("OpenAI-Organization","YOUR-ORGANISATION-ID");
+	data = Map();
+	data.put("model","gpt-3.5-turbo");
+	data.put("messages",{{"role":"user","content":input.Text_Input}});
+	// invoke url
+	response = invokeurl
+	[
+		url :"https://api.openai.com/v1/chat/completions"
+		type :POST
+		parameters:data.toString()
+		headers:headers
+	];
+	// Extract ChatGPT response
+	choices = response.getJSON("choices");
+	message = choices.getJSON("message");
+	content = message.getJSON("content");
+	input.Chat_Output = content;
+}
+
+// If you want to edit / refine output with Davinci, add following logic
+
+else if(input.Text_Input != "" && input.Chat_Output != null)
+{
+	// Setup Headers
+	headers2 = Map();
+	headers2.put("Content-Type","application/json");
+	headers2.put("Authorization","Bearer YOUR-API-KEY");
+	headers2.put("OpenAI-Organization","YOUR-ORGANISATION-ID");
+	data2 = Map();
+	data2.put("model","text-davinci-edit-001");
+	data2.put("input",input.Chat_Output);
+	data2.put("instruction",input.Text_Input);
+	// invoke url
+	response2 = invokeurl
+	[
+		url :"https://api.openai.com/v1/edits"
+		type :POST
+		parameters:data2.toString()
+		headers:headers2
+	];
+	// Extract ChatGPT response
+	choices2 = response2.getJSON("choices");
+	text = choices2.getJSON("text");
+	input.Chat_Output = text;
+}
