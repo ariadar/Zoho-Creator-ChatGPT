@@ -1,2 +1,4 @@
-# Zoho-Creator-ChatGPT
-Create a low/no code ChatGPT application with Zoho Creator. 
+# Zoho Creator ChatGPT
+Create a low/no code ChatGPT application with Zoho Creator.<p></p>This project is to help orgnaisations rapidly innovate with the power of A.I. using ChatGPT.<p></p>
+I welcome others to contribute to this project. 
+https://www.linkedin.com/in/ariadar/
