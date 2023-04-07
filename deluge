@@ -1,5 +1,4 @@
 // Trigger: On user input of text field (new prompt)
-
 if(input.Text_Input != "" && input.Refine_Input = false && input.Chat_Output == "")
 {
 	// Setup Headers
@@ -24,9 +23,7 @@ if(input.Text_Input != "" && input.Refine_Input = false && input.Chat_Output == 
 	content = message.getJSON("content");
 	input.Chat_Output = content;
 }
-
 // If you want to edit / refine output with Davinci, add following logic
-
 else if(input.Text_Input != "" && input.Chat_Output != null)
 {
 	// Setup Headers
@@ -51,9 +48,7 @@ else if(input.Text_Input != "" && input.Chat_Output != null)
 	text = choices2.getJSON("text");
 	input.Chat_Output = text;
 }
-
 // Trigger: On user input of decision field
-
 if(input.Refine_Input = true)
 {
 	input.Text_Input = "";
